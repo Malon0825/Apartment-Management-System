@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  .no-spinners::-webkit-inner-spin-button, 
+  .no-spinners::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background: #0d141a;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+      background: #0d141a;
+      border-radius: 100vh;
+      border: 2px solid #c17555;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #29445d;
+  }
+
+  .navbar-tab {
+    @apply relative bg-grayblue bg-opacity-40 w-[200px] rounded-2xl focus:outline focus:bg-transparent focus:outline-highlight hover:bg-highlight hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer
+  }
+
+  .navbar-tab-focus {
+    @apply outline-highlight outline
+  }
+
+  .navbar-text {
+    @apply text-3xl text-highlight p-2 font-semibold flex items-center relative hover:bg-darkshade
+    rounded-2xl transition-all duration-500 ease-in-out
+  }
+   
+  .add-room-input {
+    @apply h-10 w-72 outline-none bg-grayblue p-2 rounded-lg focus:bg-grayblue text-primary focus:outline-none focus:outline-highlight
+  }
+
+  .delete-room-input {
+    @apply h-10 w-72 outline-none bg-grayblue p-2 rounded-lg focus:bg-grayblue text-primary focus:outline-none focus:outline-highlight
+  }
+
+  .main-button {
+    @apply h-10 w-72 bg-highlight font-poppins text-grayblue rounded-lg font-semibold text-xl
+    hover:scale-y-110 duration-300 ease-in-out transition-all
+  }
+
+  .search-room-button {
+    @apply h-10 p-2 bg-transparent outline focus:outline-highlight focus:text-highlight font-poppins text-secondary rounded-lg font-semibold text-xl
+    hover:scale-110  duration-300 ease-in-out transition-all
+  }
+
+  .rooms-items-grid {
+    @apply h-36 bg-grayblue rounded-xl overflow-hidden hover:border-2 border-highlight bg-opacity-50 hover:bg-opacity-100 hover:h-60 transition-all duration-500 ease-in-out  text-2xl text-highlight flex items-center justify-center flex-col focus:border-highlight focus:border-2 focus:bg-grayblue focus:h-60
+  }
+}
+
+.no-spinners::-webkit-inner-spin-button, 
+.no-spinners::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
