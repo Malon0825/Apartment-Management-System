@@ -530,6 +530,7 @@ const Tennants = (props) => {
 								<select className="bg-transparent focus:bg-grayblue text-primary text-opacity-70" id="updateRoom" value={updateTennantRoom} onChange={handleUpdateRoom}>
 
 									<option className="" value="Room" selected disabled>Room</option>
+									
 									{roomVacant?.map(room => (
 									<option
 										key={room.room_name}
