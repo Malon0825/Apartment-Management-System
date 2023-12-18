@@ -208,35 +208,20 @@ const Rooms = (props) => {
         setOccupantsNumber(occupantsNumber)
     };
 
+    const [tenantDataExist, setTenantDataExist] = useState(null);
     // Handle deleting of rooms
     const handleDeleteRoom = async () => {
         if (deleteRoomName) {
             try {
                 const q = query(collection(db, "rooms"), where("room_name", "==", deleteRoomName));
                 const querySnapshot = await getDocs(q);
+                console.log(querySnapshot.docs);
                 if (querySnapshot.empty) {
                     // handle case where no room is found
                     setWindowOverlay(true)
                     setWindowMessage(`Room ${deleteRoomName} doesn't exist.`)
                 } else {
-                    // check if there is a tenant in the room
-                    let occupied = false;
-                    querySnapshot.forEach((doc) => {
-                        if (doc.data().tennant_name) {
-                            occupied = true;
-                        }
-                    });
-                    if (occupied) {
-                        setWindowOverlay(true)
-                        setWindowMessage("The room is currently occupied.")
-                    } else {
-                        querySnapshot.forEach((doc) => {
-                            deleteDoc(doc.ref);
-                        });
-                        setDeleteRoomName('')
-                        setWindowOverlay(true)
-                        setWindowMessage(`Room ${deleteRoomName} successfully deleted.`)
-                    }
+                    setTenantDataExist(querySnapshot)
                 }
             } catch (error) {
                 console.log(error)
@@ -246,6 +231,35 @@ const Rooms = (props) => {
             setWindowMessage(`Please fill up the empty field.`)
         }
     };
+
+    useEffect(() => {
+        let roomState = null;
+        if(tenantDataExist != null){
+            tenantDataExist.forEach((doc) => {
+                let tenantsName = doc.data().tennant_name;
+                console.log(tenantsName.length)
+                if (tenantsName.length > 0) {
+                    console.log(tenantsName.toString())
+                    roomState = true;
+                }else{
+                    roomState = false;
+                }
+                
+            });
+            if (roomState === true) {
+                setWindowOverlay(true)
+                setWindowMessage("The room is currently occupied.")
+            } else if (roomState === false) {
+                tenantDataExist.forEach((doc) => {
+                    deleteDoc(doc.ref);
+                });
+                setDeleteRoomName('')
+                setWindowOverlay(true)
+                setWindowMessage(`Room ${deleteRoomName} successfully deleted.`)
+            }
+        }
+    }, [tenantDataExist])
+    
 
     return (
 
